@@ -30,6 +30,53 @@ For major (breaking) changes - version 3 and 2 see end of page.
 
 | Version        | Date           | Comment  |
 | -------------- | -------------- | -------- |
+| 4.30.0         | 2020-11-12     | `get()` possibility to provide params |
+| 4.29.3         | 2020-11-09     | `blockdevices()` catch errors adapted for just one line |
+| 4.29.2         | 2020-11-09     | `blockdevices()` catch errors |
+| 4.29.1         | 2020-11-08     | `cpu()`, `system()` better parsing Raspberry Pi revision codes |
+| 4.29.0         | 2020-11-08     | `fsSize()` correct fs type detection macOS (HFS, APFS, NFS) |
+| 4.28.1         | 2020-11-05     | code cleanup, removing debug console.log() |
+| 4.28.0         | 2020-11-04     | `graphics()` added deviceName (windows) |
+| 4.27.11        | 2020-10-26     | `inetChecksite()` fixed vulnerability: command injection |
+| 4.27.10        | 2020-10-16     | `dockerContainers()` resolved hanging issue |
+| 4.27.9         | 2020-10-13     | `networkInterfaces()` loopback internal detection (windows) |
+| 4.27.8         | 2020-10-08     | windows codepages partial fix |
+| 4.27.7         | 2020-10-05     | updated typescript typings, minor fixes |
+| 4.27.6         | 2020-10-02     | `get()` fixed when results are in arrays |
+| 4.27.5         | 2020-09-18     | `cpuTemperature()` fix try catch (linux) |
+| 4.27.4         | 2020-09-16     | `networkInterfaceDefault()` optimization (macOS) |
+| 4.27.3         | 2020-08-26     | updated typescript typings |
+| 4.27.2         | 2020-08-26     | fixed issue breaking node v4 compatibility |
+| 4.27.1         | 2020-08-25     | `networkStats()` fixed packages dropped (linux) |
+| 4.27.0         | 2020-08-24     | `observe()` added function to observe/watch system parameters |
+| 4.26.12        | 2020-08-21     | `versions()` fixed issue windows |
+| 4.26.11        | 2020-08-20     | `cpuTemperature()` fixed issue windows |
+| 4.26.10        | 2020-07-16     | `networkStats()` fixed issue blocking windows |
+| 4.26.9         | 2020-06-06     | `networkStats()` fixed comparison issue windows |
+| 4.26.8         | 2020-06-06     | `networkInterfaces()` fixed caching issue |
+| 4.26.7         | 2020-06-06     | `cpuTemperature()` fixed raspberry pi sensors issue |
+| 4.26.6         | 2020-06-03     | `diskLayout()` fixed issue linux |
+| 4.26.5         | 2020-05-27     | `cpuTemperature()` optimizes scanning AMD linux sensors |
+| 4.26.4         | 2020-05-21     | `cpuTemperature()` fix (BSD), code cleanup |
+| 4.26.3         | 2020-05-20     | updated documentation (macOS temperature) |
+| 4.26.2         | 2020-05-19     | `processes()` memory leak fix |
+| 4.26.1         | 2020-05-13     | code cleanup |
+| 4.26.0         | 2020-05-12     | `diskLayout()` added full smart data where supported |
+| 4.25.2         | 2020-05-12     | `getDynamicData()` added wifiNetworks() |
+| 4.25.1         | 2020-05-07     | `get()` minor bounds test fix, updated docs |
+| 4.25.0         | 2020-05-07     | `get()` added function to get partial system info |
+| 4.24.2         | 2020-05-06     | `cpu()` fix (BSD), `networkStats()` fix BSD |
+| 4.24.1         | 2020-05-03     | `processes()` fix parsing command and params |
+| 4.24.0         | 2020-05-01     | `networkInterfaces()` added subnet mask ip4 and ip6 |
+| 4.23.10        | 2020-05-01     | `cpuTemperature()` optimized parsing linux |
+| 4.23.9         | 2020-04-29     | `currentLoad()` workarround for no os.cpus info |
+| 4.23.8         | 2020-04-26     | `getMacAddresses()` fix added try catch |
+| 4.23.7         | 2020-04-26     | `getCpuCurrentSpeedSync()` workarround fix |
+| 4.23.6         | 2020-04-25     | `networkGatewayDefault()` bug fix no interfaces |
+| 4.23.5         | 2020-04-20     | updated docs |
+| 4.23.4         | 2020-04-20     | `users()` optimized parseDateTime function |
+| 4.23.3         | 2020-04-09     | refactored to avoid `cat` |
+| 4.23.2         | 2020-04-08     | `cpu()` fixed getting base frequency for AMD Ryzen |
 | 4.23.1         | 2020-03-11     | `diskLayout()` optimized detection linux |
 | 4.23.0         | 2020-03-08     | `versions()` added param to specify which program/lib versions to detect |
 | 4.22.7         | 2020-03-08     | `diskLayout()` fixed linux |

@@ -30,7 +30,7 @@
   [![Sponsoring][sponsor-badge]][sponsor-url]
   [![MIT license][license-img]][license-url]
 
-This is amazing. Started as a small project just for myself, it now has > 9,000 lines of code, > 300 versions published, up to 1 mio downloads per month, > 6 mio downloads overall. Thank you to all who contributed to this project!
+This is amazing. Started as a small project just for myself, it now has > 10,000 lines of code, > 350 versions published, up to 2 mio downloads per month, > 20 mio downloads overall. Thank you to all who contributed to this project!
 
 ## New Version 4.0
 
@@ -38,16 +38,22 @@ This next major version release 4.0 comes with several optimizations and changes
 
 - new systeminformation website with better documentation and examples [systeminformation.io][systeminformation-url]
 - added typescript definitions
-- reworked network section: this will now return more information and allows to get networkStats for more than one interface at once.
+- reworked network section: this will now return more information and allows getting networkStats for more than one interface at once.
 - dockerContainerStats for multiple containers or all containers at once
 - optimized graphics controller and display detection
-- added wifiNetworks to get available wifi networks
+- added wifiNetworks to get available Wi-Fi networks
 - added vboxInfo to get detailed vm information
 - added chassis information
 - better Raspberry-PI detection
 - lot of minor improvements
 
-Breaking Changes: you will see some minor breaking changes. Read the [detailed changelog][changelog-url].
+Breaking Changes in version 4: you will see some minor breaking changes. Read the [detailed changelog][changelog-url].
+
+## Upcoming
+
+**MacOS on ARM, Windows on ARM**: November 11th 2020 - We will have a closer look on that! As soon as we have the new hardware here, will definitely work on support for those platforms.
+
+**Version 5**: we are planning a new major version with some minor breaking changes and some additional features. Will try to make this available Q1 of 2021.
 
 ## Quick Start
 
@@ -57,6 +63,8 @@ Lightweight collection of 40+ functions to retrieve detailed hardware, system an
 - get detailed information about system, cpu, baseboard, battery, memory, disks/filesystem, network, docker, software, services and processes
 - supports Linux, macOS, partial Windows, FreeBSD, OpenBSD, NetBSD and SunOS support
 - no npm dependencies (for production)
+
+**Attention**: this is a `node.js` library. It is supposed to be used as a backend/server-side library and will definitely not work within a browser.
 
 ### Installation
 
@@ -73,11 +81,11 @@ const si = require('systeminformation');
 
 // promises style - new since version 3
 si.cpu()
-    .then(data => console.log(data))
-    .catch(error => console.error(error));
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 ```
 
-**Callback, Promises, Awync Await**
+**Callback, Promises, Async / Await**
 
 ## News and Changes
 
@@ -85,26 +93,27 @@ si.cpu()
 
 (last 7 major and minor version releases)
 
+- Version 4.30.0: `get()` added possibility to provide parameters
+- Version 4.29.0: `fsSize()` correct fs type detection macOS (HFS, APFS, NFS)
+- Version 4.28.0: `graphics()` added deviceName (Windows)
+- Version 4.27.0: `observe()` added observe / watch function
+- Version 4.26.0: `diskLayout()` added full S.M.A.R.T data (Linux)
+- Version 4.25.0: `get()` added function to get partial system info
+- Version 4.24.0: `networkInterfaces()` added subnet mask ip4 and ip6
 - Version 4.23.0: `versions()` added param to specify which program/lib versions to detect
-- Version 4.22.0: `services()` added pids (windows)
-- Version 4.21.0: added npx copmpatibility
-- Version 4.20.0: `battery()` added designcapacity, voltage, unit
-- Version 4.19.0: `osInfo()` added uefi (OS uses UEFI during startup)
-- Version 4.18.0: `networkInterfaces()` added dhcp for mac os, added dhcp linux fallback
-- Version 4.17.0: `networkInterfaces()` added dhcp, dnsSuffix, ieee8021xAuth, ieee8021xState
 - ...
 
 You can find all changes here: [detailed changelog][changelog-url]
 
 ## Core concept
 
-[Node.js][nodejs-url] comes with some basic OS information, but I always wanted a little more. So I came up to write this little library. This library is still work in progress. It is supposed to be used as a backend/server-side library (will definilely not work within a browser). It requires node.js version 4.0 and above.
+[Node.js][nodejs-url] comes with some basic OS information, but I always wanted a little more. So I came up to write this little library. This library is still work in progress. It is supposed to be used as a backend/server-side library (will definitely not work within a browser). It requires node.js version 4.0 and above.
 
 I was able to test it on several Debian, Raspbian, Ubuntu distributions as well as macOS (Mavericks, Yosemite, El Captain, Sierra, High Sierra, Mojave) and some Windows 7, Windows 10, FreeBSD, OpenBSD, NetBSD and SunOS machines. Not all functions are supported on all operating systems. Have a look at the function reference in the docs to get further details.
 
 If you have comments, suggestions & reports, please feel free to contact me!
 
-I also created a nice little command line tool called [mmon][mmon-github-url]  (micro-monitor) for Linux and macOS, also available via [github][mmon-github-url] and [npm][mmon-npm-url]
+I also created a nice little command line tool called [mmon][mmon-github-url] (micro-monitor) for Linux and macOS, also available via [github][mmon-github-url] and [npm][mmon-npm-url]
 
 
 ## Reference
@@ -118,7 +127,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | si.version() | : string | X | X | X | X | X | lib version (no callback/promise) |
 | si.time() | {...} | X | X | X | X | X | (no callback/promise) |
 | | current | X | X | X | X | X | local (server) time |
-| | uptime | X | X | X | X | X | uptime |
+| | uptime | X | X | X | X | X | uptime in number of seconds |
 | | timezone | X | X | X | X | X | e.g. GMT+0200 |
 | | timezoneName | X | X | X | X | X | e.g. CEST |
 
@@ -256,6 +265,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | | controllers[]| X |  | X | X |  | graphics controllers array |
 | | ...[0].model | X |  | X | X |  | graphics controller model |
 | | ...[0].vendor | X |  | X | X |  | e.g. ATI |
+| | ...[0].deviceName |  |  |   | X |  | e.g. \\\\.\\DISPLAY1 |
 | | ...[0].bus | X |  | X | X |  | on which bus (e.g. PCIe) |
 | | ...[0].vram | X |  | X | X |  | VRAM size (in MB) |
 | | ...[0].vramDynamic | X |  | X | X |  | true if dynamicly allocated ram |
@@ -274,7 +284,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | | ...[0].currentResY | X |  | X | X |  | current pixel vertical |
 | | ...[0].positionX |  |  |  | X |  | display position X |
 | | ...[0].positionY |  |  |  | X |  | display position Y |
-| | ...[0].currentRefreshRate | X |  | X | X |  | current pixel vertical |
+| | ...[0].currentRefreshRate | X |  | X | X |  | current screen refresh rate |
 
 #### 7. Operating System
 
@@ -380,6 +390,7 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | | [0].serialNum | X |  | X | X |  | serial number |
 | | [0].interfaceType | X |  | | X |  | SATA, PCIe, ... |
 | | [0].smartStatus | X |  | X | X |  | S.M.A.R.T Status (see Known Issues) |
+| | [0].smartData | X |  |  |  |  | full S.M.A.R.T data from smartctl<br>requires at least smartmontools 7.0 |
 | si.blockDevices(cb) | [{...}] | X |  | X | X |  | returns array of disks, partitions,<br>raids and roms |
 | | [0].name | X |  | X | X |  | name |
 | | [0].type | X |  | X | X |  | type |
@@ -429,7 +440,9 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | | [0].iface | X | X | X | X | X | interface |
 | | [0].ifaceName | X | X | X | X | X | interface name (differs on Windows) |
 | | [0].ip4 | X | X | X | X | X | ip4 address |
+| | [0].ip4subnet | X | X | X | X | X | ip4 subnet mask |
 | | [0].ip6 | X | X | X | X | X | ip6 address |
+| | [0].ip6subnet | X | X | X | X | X | ip6 subnet mask |
 | | [0].mac | X | X | X | X | X | MAC address |
 | | [0].internal | X | X | X | X | X | true if internal interface |
 | | [0].virtual | X | X | X | X | X | true if virtual interface |
@@ -628,13 +641,15 @@ I also created a nice little command line tool called [mmon][mmon-github-url]  (
 | | [0].timeOffset | X | X | X | X | X | time Offset |
 | | [0].RTC | X | X | X | X | X | RTC |
 
-#### 14. "Get All at once" - functions
+#### 14. "Get All / Observe" - functions
 
 | Function        | Result object | Linux | BSD | Mac | Win | Sun | Comments |
 | --------------- | ------------- | ----- | ------- | --- | --- | --- | -------- |
 | si.getStaticData(cb) | {...} | X | X | X | X | X | all static data at once |
 | si.getDynamicData(srv,iface,cb) | {...} | X | X | X | X | X | all dynamic data at once<br>Specify services and interfaces to monitor<br>Defaults to first external network interface<br>Pass "*" for ALL services (linux/win only)<br>Pass "*" for ALL network interfaces |
 | si.getAllData(srv,iface,cb) | {...} | X | X | X | X | X | all data at once<br>Specify services and interfaces to monitor<br>Defaults to first external network interface<br>Pass "*" for ALL services (linux/win only)<br>Pass "*" for ALL network interfaces |
+| si.get(valueObject,cb) | {...} | X | X | X | X | X | get partial system info data at once<br>In valueObject you can define<br>all values, you want to get back <br>(see documentation for details) |
+| si.observe(valueObject,interval,cb) | - | X | X | X | X | X | Observe a defined value object<br>call callback on changes<br>polling interval in milliseconds |
 
 ### cb: Asynchronous Function Calls (callback)
 
@@ -646,13 +661,13 @@ Remember: all functions (except `version` and `time`) are implemented as asynchr
 const si = require('systeminformation');
 
 si.cpu(function(data) {
-    console.log('CPU Information:');
-    console.log('- manufucturer: ' + data.manufacturer);
-    console.log('- brand: ' + data.brand);
-    console.log('- speed: ' + data.speed);
-    console.log('- cores: ' + data.cores);
-    console.log('- physical cores: ' + data.physicalCores);
-    console.log('...');
+  console.log('CPU Information:');
+  console.log('- manufucturer: ' + data.manufacturer);
+  console.log('- brand: ' + data.brand);
+  console.log('- speed: ' + data.speed);
+  console.log('- cores: ' + data.cores);
+  console.log('- physical cores: ' + data.physicalCores);
+  console.log('...');
 })
 ```
 
@@ -660,22 +675,22 @@ si.cpu(function(data) {
 
 **Promises Style** is new in version 3.0.
 
-When omitting callback parameter (cb), then you can use all function in a promise oriented way. All functions (exept of `version` and `time`) are returning a promise, that you can consume:
+When omitting callback parameter (cb), then you can use all function in a promise oriented way. All functions (except of `version` and `time`) are returning a promise, that you can consume:
 
 ```js
 const si = require('systeminformation');
 
 si.cpu()
-    .then(data => {
-        console.log('CPU Information:');
-        console.log('- manufucturer: ' + data.manufacturer);
-        console.log('- brand: ' + data.brand);
-        console.log('- speed: ' + data.speed);
-        console.log('- cores: ' + data.cores);
-        console.log('- physical cores: ' + data.physicalCores);
-        console.log('...');
-    })
-    .catch(error => console.error(error));
+  .then(data => {
+    console.log('CPU Information:');
+    console.log('- manufucturer: ' + data.manufacturer);
+    console.log('- brand: ' + data.brand);
+    console.log('- speed: ' + data.speed);
+    console.log('- cores: ' + data.cores);
+    console.log('- physical cores: ' + data.physicalCores);
+    console.log('...');
+  })
+  .catch(error => console.error(error));
 ```
 
 ### Async / Await
@@ -688,18 +703,18 @@ Since node v7.6 you can also use the `async` / `await` pattern. The above exampl
 const si = require('systeminformation');
 
 async function cpuData() {
-    try {
-        const data = await si.cpu();
-        console.log('CPU Information:');
-        console.log('- manufucturer: ' + data.manufacturer);
-        console.log('- brand: ' + data.brand);
-        console.log('- speed: ' + data.speed);
-        console.log('- cores: ' + data.cores);
-        console.log('- physical cores: ' + data.physicalCores);
-        console.log('...');
-    } catch (e) {
-        console.log(e)
-    }
+  try {
+    const data = await si.cpu();
+    console.log('CPU Information:');
+    console.log('- manufucturer: ' + data.manufacturer);
+    console.log('- brand: ' + data.brand);
+    console.log('- speed: ' + data.speed);
+    console.log('- cores: ' + data.cores);
+    console.log('- physical cores: ' + data.physicalCores);
+    console.log('...');
+  } catch (e) {
+    console.log(e)
+  }
 }
 ```
 
@@ -708,7 +723,7 @@ async function cpuData() {
 #### macOS - Temperature Sensor
 
 To be able to measure temperature on macOS I created a little additional package. Due to some difficulties
-in NPM with `optionalDependencies`  I unfortunately was getting unexpected warnings on other platforms.
+in NPM with `optionalDependencies` I unfortunately was getting unexpected warnings on other platforms.
 So I decided to drop this optional dependency for macOS - so by default, you will not get correct values.
 
 But if you need to detect macOS temperature just run the following additional
@@ -729,12 +744,12 @@ In some cases we also discovered that `wmic` returned incorrect temperature valu
 
 #### Linux Temperature
 
-In some cases you need to install the linux `sensors` package to be able to measure temperature
+In some cases you need to install the Linux `sensors` package to be able to measure temperature
 e.g. on DEBIAN based systems by running `sudo apt-get install lm-sensors`
 
 #### Linux S.M.A.R.T. Status
 
-To be able to detect S.M.A.R.T. status on Linux you need to install `smartmontools`. On DEBIAN based linux distributions you can install it by running  `sudo apt-get install smartmontools`
+To be able to detect S.M.A.R.T. status on Linux you need to install `smartmontools`. On DEBIAN based Linux distributions you can install it by running `sudo apt-get install smartmontools`
 
 ## *: Additional Notes
 
@@ -742,17 +757,17 @@ In `fsStats()`, `disksIO()` and `networkStats()` the results / sec. values (rx_s
 with the second call of the function. It is determined by calculating the difference of transferred bytes / IOs
 divided by the time between two calls of the function.
 
-The first time you are calling one of this functions, you will get `-1` for transfer rates. The second time, you should then get statistics based on the time between the two calls ...
+The first time you are calling one of these functions, you will get `-1` for transfer rates. The second time, you should then get statistics based on the time between the two calls ...
 
-So basically, if you e.g. need a values for network stats every second, your code should look like this:
+So basically, if you e.g. need a value for network stats every second, your code should look like this:
 
 ```js
 const si = require('systeminformation');
 
 setInterval(function() {
-	si.networkStats().then(data => {
-	    console.log(data);
-	})
+  si.networkStats().then(data => {
+    console.log(data);
+  })
 }, 1000)
 ```
 
@@ -796,11 +811,11 @@ Written by Sebastian Hildebrandt [sebhildebrandt](https://github.com/sebhildebra
 - Nathan Patten [nrpatten](https://github.com/nrpatten)
 - Juan Campuzano [juancampuzano](https://github.com/juancampuzano)
 - Ricardo Polo [ricardopolo](https://github.com/ricardopolo)
+- Miłosz Dźwigała [mily20001]https://github.com/mily20001
 
 OSX Temperature: credits here are going to:
 
-- Massimiliano Marcon [mmarcon](https://github.com/mmarcon) for his work on [smc-code][smc-code-url]
-- Sébastien Lavoie [lavoiesl](https://github.com/lavoiesl) for his work on [osx-cpu-temp][osx-cpu-temp-url] code.
+- Frank Stock [pcafstockf](https://github.com/pcafstockf) - for his work on [smc-code][smc-code-url]
 
 ## Copyright Information
 
@@ -876,5 +891,4 @@ All other trademarks are the property of their respective owners.
 [mmon-npm-url]: https://npmjs.org/package/mmon
 [mmon-github-url]: https://github.com/sebhildebrandt/mmon
 
-[smc-code-url]: https://github.com/mmarcon/node-smc
-[osx-cpu-temp-url]: https://github.com/lavoiesl/osx-cpu-temp
+[smc-code-url]: https://github.com/pcafstockf/osx-temperature-sensor
